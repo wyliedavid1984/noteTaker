@@ -7,9 +7,11 @@ const app = express();
 // port from Heroku or set port to 3000
 const PORT = process.env.PORT || 3000;
 // create paths
-const index = path.join(__dirname, '/views/index.html');
-const notes = path.join(__dirname, './views/notes.html');
-const page404 = path.join(__dirname, './views/404.html') 
+const public = path.join(__dirname, "public")
+const index = path.join(public, '/views/index.html');
+const notes = path.join(public, './views/notes.html');
+const page404 = path.join(public,  './views/404.html');
+ 
 
 app.get('/', (req, res) =>{
    
