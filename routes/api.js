@@ -1,9 +1,9 @@
-//modules
+// built in modules
 const express = require('express')
 const fs = require('fs')
 const path = require('path')
+// created modules
 const addId = require("../public/assets/js/createId");
-
 
 //file path
 const dbPath = path.join(__dirname, '../db/db.json')
@@ -54,8 +54,8 @@ router.delete("/api/notes/:id", (req, res) => {
     // writing new array to db.json file
     fs.writeFileSync(dbPath, JSON.stringify(newNotes), (err)=>{
         err ? console.log(err): console.log("delete success")
-    } )
-   
+    })
+    // ending response
     res.end()
 })
 
