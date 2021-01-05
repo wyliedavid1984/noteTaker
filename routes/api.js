@@ -12,7 +12,7 @@ const dbPath = path.join(__dirname, '../db/db.json')
 const router = express.Router();
 
 // global variable
-const db = JSON.parse(fs.readFileSync(dbPath))
+let db = JSON.parse(fs.readFileSync(dbPath))
 
 // middleware to get data from post
 router.use(express.urlencoded({
@@ -33,17 +33,14 @@ router.get("/api/notes", (req, res) => {
 router.post('/api/notes', (req, res) => {
     // grabbing user input
     const note = req.body
-
     // adding to db array
     db.push(note);
     // adding id to db
-    addId(db)
-    
+    addId(db)   
     //writing new file to db.json with new user input
     fs.writeFileSync(dbPath, JSON.stringify(db), (err) => {
         err ? console.log(err) : console.log("write success")
     })
-
     // ending response
     res.end()
 })
@@ -51,12 +48,11 @@ router.post('/api/notes', (req, res) => {
 // deleting notes
 router.delete("/api/notes/:id", (req, res) => {
     // set variable to id of selected object.
-    const id = req.params.id;
-    console.log(id)
-    console.log(db)
-    db.splice(id, 1)
-    console.log(db)
-    fs.writeFileSync(dbPath, JSON.stringify(db), (err)=>{
+    const id = parseInt(req.params.id);
+    // filtering out selected id and return new array
+    const newNotes = db.filter((note) => note.id !== id)
+    // writing new array to db.json file
+    fs.writeFileSync(dbPath, JSON.stringify(newNotes), (err)=>{
         err ? console.log(err): console.log("delete success")
     } )
    
