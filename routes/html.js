@@ -14,11 +14,11 @@ const errorPage = path.join(public, './views/404.html');
 
 // middleware
 router.use(apiRoutes)
+
 // notes page
 router.get('/notes', (req, res) => {
     res.status(200).sendFile(notesPage);
 });
-
 
 // index pages I added this in later and just decided to keep the 404 page works fine. if you change the * to a /
 router.get('*', (req, res) => {
