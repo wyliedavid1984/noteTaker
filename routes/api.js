@@ -2,7 +2,9 @@
 const express = require('express')
 const fs = require('fs')
 const path = require('path')
-const {v4: uuidv4} = require('uuid');
+const {
+    v4: uuidv4
+} = require('uuid');
 
 
 //file path
@@ -11,6 +13,8 @@ const dbPath = path.join(__dirname, '../db/db.json')
 // express app
 const router = express.Router();
 
+// global variable
+const db = JSON.parse(fs.readFileSync(dbPath))
 
 // middleware to get data from post
 router.use(express.urlencoded({
@@ -18,27 +22,21 @@ router.use(express.urlencoded({
 }))
 router.use(express.json())
 
-//variable
-let db =fs.readFile(dbPath, "utf8", (err, data) => {
-        err ? console.log(err) : console.log("read success")
-        JSON.stringify(data)
-    })
-
 // getting old notes
 router.get("/api/notes", (req, res) => {
 
-    const note = fs.readFile(dbPath, "utf8", (err, data) => {
-        err ? console.log(err) : console.log("read success")
-        res.json(JSON.parse(data))
-    })
+    res.json(db)
 })
 
 // posting notes
 router.post('/api/notes', (req, res) => {
+    const note = req.body
+      note += id.uuidv4();
+      console.log(note)
+    db.push(note);
     
-    db.push(req.body)
 
-    const newNote = fs.writeFile(dbPath, JSON.stringify(note), (err) => {
+    fs.writeFileSync(dbPath, JSON.stringify(db), (err) => {
         err ? console.log(err) : console.log("write success")
         res.end()
     })
@@ -51,7 +49,7 @@ router.delete("/api/notes/:id", (req, res) => {
 
     const id = req.params.id;
 
-    notes.findByIdAndDelete(id)
+    notes.filter(id)
         .then(result => {
             res.json({
                 // res.redirect('/notes')
