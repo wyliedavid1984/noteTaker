@@ -26,30 +26,33 @@ router.use(express.json())
 router.get("/api/notes", (req, res) => {
 
     res.json(db)
+    res.end()
 })
 
 // posting notes
 router.post('/api/notes', (req, res) => {
     const note = req.body
-      note += id.uuidv4();
+      
       console.log(note)
-    db.push(note);
-    
 
+    db.push(note);
+    for(var i =0; i<db.legth; i++){
+        db.id += [i];
+    }
+    console.log(db);
     fs.writeFileSync(dbPath, JSON.stringify(db), (err) => {
         err ? console.log(err) : console.log("write success")
-        res.end()
     })
-
-
+    res.end()
 })
 
 // deleting notes
 router.delete("/api/notes/:id", (req, res) => {
 
     const id = req.params.id;
+    console.log(id)
 
-    notes.filter(id)
+    db.filter(id)
         .then(result => {
             res.json({
                 // res.redirect('/notes')
