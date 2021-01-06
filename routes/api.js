@@ -15,7 +15,7 @@ const router = express.Router();
 
 // global variable
 let db = JSON.parse(fs.readFileSync(dbPath))
-const writeFileAsync = util.promisfy(fs.writeFile)
+const writeFileAsync = util.promisify(fs.writeFile)
 
 // middleware to get data from post
 router.use(express.urlencoded({
