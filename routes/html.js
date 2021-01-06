@@ -25,9 +25,4 @@ router.get('*', (req, res) => {
     res.status(200).sendFile(indexPage);
 });
 
-// 404 page
-router.use((req, res) => {
-    res.status(404).sendFile(errorPage);
-});
-
 module.exports =  router; 

@@ -23,6 +23,7 @@ router.use(express.static('public'));
 
 // getting old notes
 router.get("/api/notes", (req, res) => {
+    console.log("get request")
     //grabbing the json object to display 
     res.json(db)
     //ending response so it don't continue
@@ -31,6 +32,7 @@ router.get("/api/notes", (req, res) => {
 
 // posting notes
 router.post('/api/notes', (req, res) => {
+    console.log("post request")
     // grabbing user input
     const note = req.body
     // adding to db array
@@ -47,7 +49,7 @@ router.post('/api/notes', (req, res) => {
 
 // deleting notes
 router.delete("/api/notes/:id", (req, res) => {
-    console.log('working')
+    console.log('delete request')
     // set variable to id of selected object.
     const id = parseInt(req.params.id);
     // filtering out selected id and return new array
