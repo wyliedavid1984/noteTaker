@@ -42,7 +42,7 @@ router.post('/api/notes', (req, res) => {
     addId(db)
     //writing new file to db.json with new user input
     writeFileAsync(dbPath, JSON.stringify(db), (err) => {
-        err ? console.log(err) : console.log("write success")
+        err ? console.log(err) : console.log("write success")       
     })
     // ending response
     res.json(db)
@@ -61,16 +61,18 @@ router.delete("/api/notes/:id", (req, res) => {
     let newDB = writeFileAsync(dbPath, JSON.stringify(newNotes)).then((data) => {
         
         console.log("delete success")
-        return JSON.parse(data)
+        
+        console.log("promise", newDB)
+    console.log("end of delete request")
+
+    res.json(db)
+    
     }).catch((err) => {
         console.error(err)
     })
     // ending response
-    console.log("promise", newDB)
-    console.log("end of delete request")
-
-    res.json(db)
-
+    
+    res.end()
 })
 
 module.exports = router;
