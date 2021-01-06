@@ -2,6 +2,7 @@
 const {
     rejects
 } = require('assert');
+const { json } = require('express');
 const express = require('express')
 const fs = require('fs');
 const {
@@ -69,21 +70,22 @@ router.delete("/api/notes/:id", (req, res) => {
             reject('Failed')
         }
     })
-    p.then((results) => {
-
+    p.then((result) => {
         // writing new array to db.json file
-        writeFileAsync(dbPath, JSON.stringify(results))
-            .then(() => {
+        console.log(result, "the first")
+        writeFileAsync(dbPath, JSON.stringify(result))
+            .then((results) => {
                 res.json(db)
-                res.end()
+                console.log(results, "the second")
                 console.log("end of delete request")
             }).catch((err) => {
                 console.error(err)
             })
+        
     })
 
     // ending response
-
+    res.end()
 })
 
 module.exports = router;
