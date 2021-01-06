@@ -2,8 +2,10 @@
 const express = require('express')
 const fs = require('fs')
 const path = require('path')
+const util = require('util')
 // created modules
 const addId = require("../public/assets/js/createId");
+
 
 //file path
 const dbPath = path.join(__dirname, '../db/db.json')
@@ -70,6 +72,7 @@ router.delete("/api/notes/:id", (req, res) => {
     }).catch((err) => {
         console.error(err)
     })
+
     console.log("end of delete request")
 
     res.json(db)
