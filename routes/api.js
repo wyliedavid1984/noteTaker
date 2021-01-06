@@ -14,13 +14,17 @@ const dbPath = path.join(__dirname, '../db/db.json')
 const router = express.Router();
 
 // global variable
-let db = JSON.parse(fs.readFileSync(dbPath))
+const readFileAsync = util.promisify(fs.readFile);
 const writeFileAsync = util.promisify(fs.writeFile)
 
+let db = JSON.parse(readFileAsync(dbPath)).then(() => {
+    console.log("delete success")
+}).catch((err) => {
+    console.error(err)
+})
+
 // middleware to get data from post
-router.use(express.urlencoded({
-    extended: true
-}))
+router.use(express.urlencoded({ extended: true }))
 router.use(express.json())
 router.use(express.static('public'));
 
@@ -63,18 +67,17 @@ router.delete("/api/notes/:id", (req, res) => {
     //     if (err) {
     //         console.log(err + "error here")
     //     }
-
     // })
-    // ending response
 
-    writeFileAsync(dbPath, JSON.stringify(newNotes)).then (() => {
+
+    writeFileAsync(dbPath, JSON.stringify(newNotes)).then(() => {
         console.log("delete success")
     }).catch((err) => {
         console.error(err)
     })
 
     console.log("end of delete request")
-
+    // ending response
     res.json(db)
 
 })
