@@ -13,6 +13,7 @@ const router = express.Router();
 
 // global variable
 let db = JSON.parse(fs.readFileSync(dbPath))
+const writeFileAsync = util.promisfy(fs.writeFile)
 
 // middleware to get data from post
 router.use(express.urlencoded({
@@ -43,7 +44,7 @@ router.post('/api/notes', (req, res) => {
     })
     // ending response
     res.json(db)
-    
+
 })
 
 // deleting notes
@@ -51,19 +52,25 @@ router.delete("/api/notes/:id", (req, res) => {
     console.log("delete request")
     // set variable to id of selected object.
     const id = parseInt(req.params.id);
-    console.log(id, db +"id and db")
+    console.log(id, db + "id and db")
     // filtering out selected id and return new array
     const newNotes = db.filter((note) => note.id !== id)
     // writing new array to db.json file
     console.log(newNotes)
-    fs.writeFileSync(dbPath, JSON.stringify(newNotes), (err) => {
-        err ? console.log(err) : console.log("delete success")
-    })
+    // fs.writeFileSync(dbPath, JSON.stringify(newNotes), function (err) {
+    //     if (err) {
+    //         console.log(err + "error here")
+    //     }
+
+    // })
     // ending response
-    
+
+    writeFileAsync(dbPath, JSON.stringify(newNotes)).then (() => {
+        console.log("delete success")
+    })
     console.log("end of delete request")
 
-  res.json(db)
+    res.json(db)
 
 })
 
