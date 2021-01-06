@@ -74,9 +74,8 @@ gif for newcode branch also a link to video
 
 * [Node Documents](https://nodejs.org/api/index.html)
 * [npm Documents](https://www.npmjs.com/)
-* [GitHub Inquirer](https://github.com/SBoudrias/Inquirer.js#readme)
-* [W3schools](https://www.w3schools.com/default.asp) 
-* [Mdn web docs general research](https://developer.mozilla.org/en-US/)
+* [Express.js](https://expressjs.com/)
+* [Stack Overflow](https://stackoverflow.com/)
 
 ## License
 
