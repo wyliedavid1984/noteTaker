@@ -67,6 +67,8 @@ router.delete("/api/notes/:id", (req, res) => {
 
     writeFileAsync(dbPath, JSON.stringify(newNotes)).then (() => {
         console.log("delete success")
+    }).catch((err) => {
+        console.error(err)
     })
     console.log("end of delete request")
 
