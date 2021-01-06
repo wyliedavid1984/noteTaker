@@ -14,18 +14,13 @@ const dbPath = path.join(__dirname, '../db/db.json')
 const router = express.Router();
 
 // global variable
-const readFileAsync = util.promisify(fs.readFile);
+let db = JSON.parse(fs.readFileSync(dbPath))
 const writeFileAsync = util.promisify(fs.writeFile)
 
-let db = (readFileAsync(dbPath)).then((results) => {
-    console.log("delete success")
-    return JSON.parse(results)
-}).catch((err) => {
-    console.error(err)
-})
-
 // middleware to get data from post
-router.use(express.urlencoded({ extended: true }))
+router.use(express.urlencoded({
+    extended: true
+}))
 router.use(express.json())
 router.use(express.static('public'));
 
@@ -46,7 +41,7 @@ router.post('/api/notes', (req, res) => {
     // adding id to db
     addId(db)
     //writing new file to db.json with new user input
-    fs.writeFileSync(dbPath, JSON.stringify(db), (err) => {
+    writeFileAsync(dbPath, JSON.stringify(db), (err) => {
         err ? console.log(err) : console.log("write success")
     })
     // ending response
@@ -59,26 +54,21 @@ router.delete("/api/notes/:id", (req, res) => {
     console.log("delete request")
     // set variable to id of selected object.
     const id = parseInt(req.params.id);
-    console.log(id, db + "id and db")
     // filtering out selected id and return new array
     const newNotes = db.filter((note) => note.id !== id)
     // writing new array to db.json file
     console.log(newNotes)
-    // fs.writeFileSync(dbPath, JSON.stringify(newNotes), function (err) {
-    //     if (err) {
-    //         console.log(err + "error here")
-    //     }
-    // })
-
-
-    writeFileAsync(dbPath, JSON.stringify(newNotes)).then(() => {
+    let newDB = writeFileAsync(dbPath, JSON.stringify(newNotes)).then((data) => {
+        
         console.log("delete success")
+        return JSON.parse(data)
     }).catch((err) => {
         console.error(err)
     })
-
-    console.log("end of delete request")
     // ending response
+    console.log("promise", newDB)
+    console.log("end of delete request")
+
     res.json(db)
 
 })
