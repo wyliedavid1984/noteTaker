@@ -43,7 +43,7 @@ router.post('/api/notes', (req, res) => {
     })
     // ending response
     res.json(db)
-    res.end()
+    
 })
 
 // deleting notes
@@ -51,17 +51,20 @@ router.delete("/api/notes/:id", (req, res) => {
     console.log("delete request")
     // set variable to id of selected object.
     const id = parseInt(req.params.id);
+    console.log(id, db +"id and db")
     // filtering out selected id and return new array
     const newNotes = db.filter((note) => note.id !== id)
     // writing new array to db.json file
+    console.log(newNotes)
     fs.writeFileSync(dbPath, JSON.stringify(newNotes), (err) => {
         err ? console.log(err) : console.log("delete success")
     })
     // ending response
-    res.json(db)
+    
     console.log("end of delete request")
-    res.end()
-    return;
+
+  res.json(db)
+
 })
 
 module.exports = router;
