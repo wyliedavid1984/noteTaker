@@ -17,8 +17,9 @@ const router = express.Router();
 const readFileAsync = util.promisify(fs.readFile);
 const writeFileAsync = util.promisify(fs.writeFile)
 
-let db = JSON.parse(readFileAsync(dbPath)).then(() => {
+let db = (readFileAsync(dbPath)).then((results) => {
     console.log("delete success")
+    return JSON.parse(results)
 }).catch((err) => {
     console.error(err)
 })
