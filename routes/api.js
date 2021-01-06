@@ -48,6 +48,7 @@ router.post('/api/notes', (req, res) => {
 
 // deleting notes
 router.delete("/api/notes/:id", (req, res) => {
+    console.log("delete request")
     // set variable to id of selected object.
     const id = parseInt(req.params.id);
     // filtering out selected id and return new array
@@ -58,7 +59,9 @@ router.delete("/api/notes/:id", (req, res) => {
     })
     // ending response
     res.json(db)
+    console.log("end of delete request")
     res.end()
+    return;
 })
 
 module.exports = router;

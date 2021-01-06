@@ -2,6 +2,13 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+<img src="https://img.shields.io/badge/node.js%20-%2343853D.svg?&style=for-the-badge&logo=node.js&logoColor=white"/>
+<img src="https://img.shields.io/badge/express.js%20-%23404d59.svg?&style=for-the-badge"/>
+<img src="https://img.shields.io/badge/css3%20-%231572B6.svg?&style=for-the-badge&logo=css3&logoColor=white"/>
+<img src="https://img.shields.io/badge/html5%20-%23E34F26.svg?&style=for-the-badge&logo=html5&logoColor=white"/>
+<img src="https://img.shields.io/badge/heroku%20-%23430098.svg?&style=for-the-badge&logo=heroku&logoColor=white"/>
+<img src="https://img.shields.io/badge/bootstrap%20-%23563D7C.svg?&style=for-the-badge&logo=bootstrap&logoColor=white"/>
+
 ## Description 
 
 Created an application that can be used to write, save, and delete notes. This application uses an express backend and save and retrieve note data from a JSON file.
@@ -28,7 +35,7 @@ I used several technologies beyond express to help with the application.
 
 ### Javascript
 
-The index.js file was provided so that we could work with html.  It made use of jQuery.
+The index.js file was provided so that we could work with html.  It made use of jQuery. I also create a few modules with just vanilla js.
 
 #### Node
 
@@ -75,13 +82,8 @@ For users that need to keep track of a lot of information, it's easy to forget o
 
 Click on the gif to be linked to the video
 
-[![Gif of video](./develop/assets/teamGenerator.gif)](https://drive.google.com/file/d/181Agg39TZ2LZbTeLjCsmY9YTilF6Ii0v/view)
+[![Gif of video](./assets/images/.gif)]()
 
-gif for newcode branch also a link to video
-
-[![Gif of newcode Branch video](./develop/assets/newcodeBranch.gif)](https://drive.google.com/file/d/1EJxbwJGMmzLyrizoam69io-b7w4c6s5c/view)
-
-![CLI for newcode Branch](./develop/assets/newcodeCli.png)
 
 </details>
 
@@ -100,4 +102,4 @@ Copyright (c) 2020 David Wylie
 
 ## Contact
 
-* [David Wylie github](https://github.com/wyliedavid1984)
+* [David Wylie Github](https://github.com/wyliedavid1984)
