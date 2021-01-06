@@ -57,22 +57,25 @@ router.post('/api/notes', (req, res) => {
 
 // deleting notes
 router.delete("/api/notes/:id", (req, res) => {
-    console.log("delete request")
     // set variable to id of selected object.
     const id = parseInt(req.params.id);
     // filtering out selected id and return new array
     let p = new Promise((resolve, reject) => {
         const newNotes = db.filter((note) => note.id !== id)
-        if (newNotes.length > 1) {
+        if (newNotes) {
+
             resolve(newNotes)
         } else {
             reject('Failed')
         }
     })
-    p.then((newNotes) => {
+    p.then((results) => {
+
         // writing new array to db.json file
-        writeFileAsync(dbPath, JSON.stringify(newNotes))
+        writeFileAsync(dbPath, JSON.stringify(results))
             .then(() => {
+                res.json(db)
+                res.end()
                 console.log("end of delete request")
             }).catch((err) => {
                 console.error(err)
@@ -80,8 +83,7 @@ router.delete("/api/notes/:id", (req, res) => {
     })
 
     // ending response
-    res.json(db)
-    res.end()
+
 })
 
 module.exports = router;
