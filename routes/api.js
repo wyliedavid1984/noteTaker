@@ -23,7 +23,6 @@ router.use(express.static('public'));
 
 // getting old notes
 router.get("/api/notes", (req, res) => {
-    console.log("get request")
     //grabbing the json object to display 
     res.json(db)
     //ending response so it don't continue
@@ -32,33 +31,33 @@ router.get("/api/notes", (req, res) => {
 
 // posting notes
 router.post('/api/notes', (req, res) => {
-    console.log("post request")
     // grabbing user input
     const note = req.body
     // adding to db array
     db.push(note);
     // adding id to db
-    addId(db)   
+    addId(db)
     //writing new file to db.json with new user input
     fs.writeFileSync(dbPath, JSON.stringify(db), (err) => {
         err ? console.log(err) : console.log("write success")
     })
     // ending response
+    res.json(db)
     res.end()
 })
 
 // deleting notes
 router.delete("/api/notes/:id", (req, res) => {
-    console.log('delete request')
     // set variable to id of selected object.
     const id = parseInt(req.params.id);
     // filtering out selected id and return new array
     const newNotes = db.filter((note) => note.id !== id)
     // writing new array to db.json file
-    fs.writeFileSync(dbPath, JSON.stringify(newNotes), (err)=>{
-        err ? console.log(err): console.log("delete success")
+    fs.writeFileSync(dbPath, JSON.stringify(newNotes), (err) => {
+        err ? console.log(err) : console.log("delete success")
     })
     // ending response
+    res.json(db)
     res.end()
 })
 
