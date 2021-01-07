@@ -20,7 +20,7 @@ I used several technologies beyond express to help with the application.
 
 -[Technologies](#Technologies)
    
--[Usage](#Usage)
+-[Usages](#Usages)
 
 -[Visuals](#Visuals)
 
@@ -35,15 +35,15 @@ I used several technologies beyond express to help with the application.
 
 ### Javascript
 
-The index.js file was provided, so that we could work with html inputs as well as request methods.  It made use of jQuery. I also create a module with just vanilla js to create an id for each note.
+The index.js file was provided, so that we could work with html inputs as well as request methods.  It made use of jQuery. I also create a module that exported several functions to help with getting data. the function were to get data, add, and delete it from the data base.
 
 #### Node
 
-I used node to initialize package.json. After the initialization, I added express via NPM.  Also used node to run the local server instance. I also required a few built-in modules as well as making one of my own. The built in modules that I used were path and file system.  I use path to shorten code in server place by setting up variable that made paths to different file through out the application. FS was used to read and write files. FS would read a file in a get request to display content to the page. In the post request, I would push up the new data from the user and write a file with the new content to allow it to display on the page. I also used it in the delete request after I removed items from an array to display the new array. 
+I used node to initialize package.json. After the initialization, I added express via NPM.  Also used node to run the local server instance. I also required a few built-in modules as well as making one of my own. The built in modules that I used were path, util, and file system.  I use path to shorten code in server place by setting up variable that made paths to different file through out the application. FS was used to read and write files. FS would read a file in a get request to display content to the page. In the post request, I would push up the new data from the user and write a file with the new content to allow it to display on the page. I also used it in the delete request after I removed items from an array to display the new array. 
 
 #### NPM
 
-I used npm to install the dependency express that did most of the heavy lifting for this application
+I used npm to install the dependency express that did most of the heavy lifting for this application. I also installed uuid to help with creating ids. 
 
 #### Express
 
@@ -70,21 +70,17 @@ For users that need to keep track of a lot of information, it's easy to forget o
 <details>
 <summary>Screen Shots and Gif with Video link</summary>
 
-![](./develop/assets/.png)
+![Index Page](./public/assets/images/indexPage.png)
 
-![](./develop/assets/.png)
+![Note page with notes](./public/assets/images/withNotes.png)
 
-![](./develop/assets/.png)
+![Note page without notes](./public/assets/images/noNotes.png)
 
-![](./develop/assets/.png)
 
-![](./develop/assets/.png)
-
-![](./develop/assets/.png)
 
 Click on the gif to be linked to the video
 
-[![Gif of video](./assets/images/.gif)]()
+[![Gif of video](./public/assets/images/NoteTaker.gif)](https://drive.google.com/file/d/1tqdl3Cbk0IHt20BHImzLgav4XJuS49_R/view)
 
 
 </details>
