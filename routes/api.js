@@ -23,6 +23,13 @@ router.get("/api/notes", (req, res) => {
    .catch((err) => res.status(500).json(err))
 })
 
+// posting notes
+router.post('/api/notes', (req, res) => {
+    storage
+        .addToDB(req.body)
+        .then((note) => res.json(note))
+        .catch((err) => res.status(500).json(err))
+})
 
 
 module.exports = router;

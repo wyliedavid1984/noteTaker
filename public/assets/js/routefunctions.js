@@ -1,6 +1,8 @@
 const util = require('util')
 const fs = require('fs');
-const { v4: uuidv4 } = require('uuid');
+const {
+    v4: uuidv4
+} = require('uuid');
 const writeFileAsync = util.promisify(fs.writeFile);
 const readFileAsync = util.promisify(fs.readFile);
 const path = require('path');
@@ -17,20 +19,40 @@ class Storage {
     writefile = (data) => {
         return writeFileAsync(dbPath, JSON.stringify(data));
     }
-getDB = () => {
-    return this.readfile().then((note) => {
-        let newNotes;
-        try {
-            newNotes = [].concat(JSON.parse(note))
-        } catch (err) {
-            newNotes = []
+    getDB = () => {
+        return this.readfile().then((note) => {
+            let newNotes;
+            try {
+                newNotes = [].concat(JSON.parse(note))
+            } catch (err) {
+                newNotes = []
+            }
+
+            return newNotes;
+        })
+
+    }
+    addToDB(note) {
+        const {
+            title,
+            text
+        } = note;
+
+        if (!title || !text) {
+            throw new Error("Note 'title' and 'text' are required")
         }
 
-        return newNotes;
-    })
+        const newNote = {
+            title,
+            text,
+            id: uuidv4()
+        }
 
-}
-
+        return this.getDB()
+            .then((notes) => [...notes, newNote])
+            .then((updatedNotes) => this.writefile(updatedNotes))
+            .then(() => newNote)
+    }
 
 }
 module.exports = new Storage();
