@@ -53,6 +53,18 @@ class Storage {
             .then((updatedNotes) => this.writefile(updatedNotes))
             .then(() => newNote)
     }
+    
+removeFromDB(id) {
 
+    let newNotes
+
+    return this.getDB()
+        .then((notes) => {
+            newNotes = notes.filter((note) => note.id !== id)
+            return newNotes
+        })
+        .then((updatedNotes) => this.writefile(updatedNotes))
+        .then(() => newNotes)
+}
 }
 module.exports = new Storage();
